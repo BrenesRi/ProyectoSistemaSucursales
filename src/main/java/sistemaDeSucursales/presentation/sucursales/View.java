@@ -74,6 +74,19 @@ public class View implements Observer {
                 controller.borrar(row);
             }
         });
+        reporteFld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.imprimir();
+                    if (Desktop.isDesktopSupported()) {
+                        File myFile = new File("sucursales.pdf");
+                        Desktop.getDesktop().open(myFile);
+                    }
+                } catch (Exception ex) {
+                }
+            }
+            });
     }
     public JPanel getPanel() {
         return panel;
