@@ -1,6 +1,12 @@
 package sistemaDeSucursales.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlID;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Sucursal {
+    @XmlID
     String codigo;
     String referencia;
     String direccion;
@@ -16,6 +22,8 @@ public class Sucursal {
         this.ubicacionX = ubicacionX;
         this.ubicacionY = ubicacionY;
     }
+    public Sucursal (){this("","","",0,0,0);}
+
 
     public String getCodigo() {
         return codigo;

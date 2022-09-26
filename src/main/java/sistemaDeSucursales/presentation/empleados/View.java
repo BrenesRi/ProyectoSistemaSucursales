@@ -1,21 +1,17 @@
 package sistemaDeSucursales.presentation.empleados;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
 
 public class View implements Observer {
     private JLabel nombreLbl;
-    private JTextField textField1;
+    private JTextField nombreFld;
     private JButton buscarFld;
     private JButton agregarFld;
     private JButton borrarFld;
@@ -24,27 +20,32 @@ public class View implements Observer {
     private JPanel panel;
 
     public View() {
-
         buscarFld.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.buscar(nombreLbl.getText());
+                controller.buscar(nombreFld.getText());
             }
         });
         agregarFld.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //controller.preAgregar();
+                controller.preAgregar();
             }
         });
         empleadosFld.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() ==2){
+                if (e.getClickCount() == 2) {
                     int row = empleadosFld.getSelectedRow();
                     controller.editar(row);
                 }
-                super.mouseClicked(e);
+            }
+        });
+        borrarFld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = empleadosFld.getSelectedRow();
+                controller.borrar(row);
             }
         });
     }
@@ -72,5 +73,4 @@ public class View implements Observer {
         empleadosFld.setRowHeight(30);
         this.panel.revalidate();
     }
-
 }

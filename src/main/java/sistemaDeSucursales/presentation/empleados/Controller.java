@@ -33,7 +33,17 @@ public class Controller {
         Empleado e=null;
         try {
             e= Service.instance().empleadoGet(cedula);
-            //Application.empleadoController.editar(e);
+            Application.empleadoController.editar(e);
+        } catch (Exception ex) {}
+    }
+
+    public void borrar(int row){
+        String cedula = model.getEmpleados().get(row).getCedula();
+        Empleado e=null;
+        try {
+            e= Service.instance().empleadoGet(cedula);
+            Service.instance().empleadoDelete(e);
+            this.buscar("");
         } catch (Exception ex) {}
     }
 

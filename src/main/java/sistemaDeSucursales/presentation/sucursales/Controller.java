@@ -1,6 +1,7 @@
 package sistemaDeSucursales.presentation.sucursales;
 
 import sistemaDeSucursales.Application;
+import sistemaDeSucursales.logic.Empleado;
 import sistemaDeSucursales.logic.Sucursal;
 import sistemaDeSucursales.logic.Service;
 
@@ -21,17 +22,27 @@ public class Controller {
         model.setSucursales(rows);
         model.commit();
     }
-   // public void preAgregar(){
-      //  Application.empleadoController.preAgregar();
-   // }
+    public void preAgregar(){
+       Application.sucursalController.preAgregar();
+   }
    public void editar(int row){
        String cedula = model.getSucursales().get(row).getCodigo();
        Sucursal e=null;
        try {
            e= Service.instance().sucursalGet(cedula);
-         //  Application.sucursalController.editar(e);
+           Application.sucursalController.editar(e);
        } catch (Exception ex) {}
    }
+
+    public void borrar(int row){
+        String codigo = model.getSucursales().get(row).getCodigo();
+        Sucursal e=null;
+        try {
+            e= Service.instance().sucursalGet(codigo);
+            Service.instance().sucursalDelete(e);
+            this.buscar("");
+        } catch (Exception ex) {}
+    }
     public void show(){
         Application.window.setContentPane(view.getPanel());
     }
